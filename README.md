@@ -31,8 +31,8 @@ Specifying SQL Queries:
 26. Provide a query that shows the most purchased Media Type. 
 27. Provide a query that shows the number tracks purchased in all invoices that contain more than one genre. 
 
-EMD SCHEME:
-![](https://user-images.githubusercontent.com/40778282/84611232-34ef3300-ae8b-11ea-8f43-b5a70a750e62.png){ width=50% }
+### EMD SCHEME:
+![](https://user-images.githubusercontent.com/40778282/84611232-34ef3300-ae8b-11ea-8f43-b5a70a750e62.png)
 
 
 
