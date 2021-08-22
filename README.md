@@ -1,13 +1,8 @@
-# sql
-
-Chinook Database
--------
+# Chinook Database SQL
 Chinook is a sample database available for SQL Server, Oracle, MySQL, etc. It can be created by running a single SQL script. Chinook database is an alternative to the Northwind database, being ideal for demos and testing ORM tools targeting single and multiple database servers.
 
-EMD SCHEME:
-![](https://user-images.githubusercontent.com/40778282/84611232-34ef3300-ae8b-11ea-8f43-b5a70a750e62.png)
-
 Specifying SQL Queries:
+-------
 1. Provide a query showing Customers (just their full names, customer ID and country) who are not in the US.
 2. Provide a query only showing the Customers from Brazil.
 3. Provide a query showing the Invoices of customers who are from Brazil. The resultant table should show the customer's full name, Invoice ID, Date of the invoice and billing country.
@@ -36,7 +31,8 @@ Specifying SQL Queries:
 26. Provide a query that shows the most purchased Media Type. 
 27. Provide a query that shows the number tracks purchased in all invoices that contain more than one genre. 
 
-
+EMD SCHEME:
+![](https://user-images.githubusercontent.com/40778282/84611232-34ef3300-ae8b-11ea-8f43-b5a70a750e62.png)
 
 
 
