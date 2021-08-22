@@ -5,7 +5,7 @@ Chinook Database
 Chinook is a sample database available for SQL Server, Oracle, MySQL, etc. It can be created by running a single SQL script. Chinook database is an alternative to the Northwind database, being ideal for demos and testing ORM tools targeting single and multiple database servers.
 
 EMD SCHEME:
-![](https://static.vecteezy.com/system/resources/previews/001/416/673/original/angular-emblem-white-letter-on-red-vector.jpg)
+![](https://user-images.githubusercontent.com/40778282/84611232-34ef3300-ae8b-11ea-8f43-b5a70a750e62.png)
 
 Specifying SQL Queries:
 1. Provide a query showing Customers (just their full names, customer ID and country) who are not in the US.
