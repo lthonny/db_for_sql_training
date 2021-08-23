@@ -47,8 +47,9 @@ WHERE
 
 4. Provide a query showing only the Employees who are Sales Agents.
 ```
-SELECT * 
-FROM 
+SELECT
+  *
+FROM
   "Employee";
 ```
 
