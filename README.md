@@ -17,7 +17,7 @@ WHERE
 ```
 
 2. Provide a query only showing the Customers from Brazil.
-```
+```sql
 SELECT
   "CustomerId",
   "FirstName",
@@ -30,7 +30,7 @@ WHERE
 ```
 
 3. Provide a query showing the Invoices of customers who are from Brazil. The resultant table should show the customer's full name, Invoice ID, Date of the invoice and billing country.
-```
+```sql
 SELECT
   "Customer"."CustomerId",
   "FirstName",
@@ -46,7 +46,7 @@ WHERE
 ```
 
 4. Provide a query showing only the Employees who are Sales Agents.
-```
+```sql
 SELECT
   *
 FROM
@@ -54,7 +54,7 @@ FROM
 ```
 
 5. Provide a query showing a unique list of billing countries from the Invoice table. 
-```
+```sql
 SELECT DISTINCT
   "BillingCountry"
 FROM
@@ -67,7 +67,7 @@ FROM
 ```
 
 7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers. 
-```
+```sql
 SELECT
   "Customer"."FirstName",
   "Customer"."LastName",
@@ -81,102 +81,102 @@ FROM
 ```
 
 8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?
-```
+```sql
 
 ```
 
 9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
-```
+```sql
 
 ```
 
 10. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
-```
+```sql
 
 ```
 
 11. Provide a query that includes the track name with each invoice line item. 
-```
+```sql
 
 ```
 
 12. Provide a query that includes the purchased track name AND artist name with each invoice line item.
-```
+```sql
 
 ```
 
 13. Provide a query that shows the # of invoices per country. HINT: GROUP BY 
-```
+```sql
 
 ```
 
 14. Provide a query that shows the total number of tracks in each playlist. The Playlist name should be included on the resultant table. 
-```
+```sql
 
 ```
 
 15. Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
-```
+```sql
 
 ```
 
 16. Provide a query that shows all Invoices but includes the # of invoice line items. 
-```
+```sql
 
 ```
 
 17. Provide a query that shows total sales made by each sales agent.
-```
+```sql
 
 ```
 
 18. Which sales agent made the most in sales in 2009?
-```
+```sql
 
 ```
 
 19. Which sales agent made the most in sales in 2010?
-```
+```sql
 
 ```
 
 20. Which sales agent made the most in sales over all?
-```
+```sql
 
 ```
 
 21. Provide a query that shows the # of customers assigned to each sales agent. 
-```
+```sql
 
 ```
 
 22. Provide a query that shows the total sales per country. Which country's customers spent the most?
-```
+```sql
 
 ```
 
 23. Provide a query that shows the most purchased track of 2013.
-```
+```sql
 
 ```
 
 24. Provide a query that shows the top 5 most purchased tracks over all. 
-```
+```sql
 
 ```
 
 25. Provide a query that shows the top 3 best selling artists.
-```
+```sql
 
 ```
 
 26. Provide a query that shows the most purchased Media Type. 
-```
+```sql
 
 ```
 
 27. Provide a query that shows the number tracks purchased in all invoices that contain more than one genre. 
-```
+```sql
 
 ```
 
