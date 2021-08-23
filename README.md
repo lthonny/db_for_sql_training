@@ -62,7 +62,7 @@ FROM
 ```
 
 6. Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
-```
+```sql
 SELECT 
 	"Employee"."LastName", 
 	"Employee"."FirstName",
@@ -94,7 +94,12 @@ FROM
 
 9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 ```sql
-
+SELECT 	
+	COUNT("InvoiceId")
+FROM 
+	"InvoiceLine"
+WHERE 
+	"InvoiceId" = 37
 ```
 
 10. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
@@ -109,7 +114,15 @@ FROM
 
 12. Provide a query that includes the purchased track name AND artist name with each invoice line item.
 ```sql
-
+SELECT 
+	"Artist"."Name" AS "NameArtist",
+	"Track"."Composer",
+	"Track"."Name" AS "NameTrack",
+	"InvoiceLine"."InvoiceId"
+FROM "Artist"
+	INNER JOIN "Album" ON "Artist"."ArtistId" = "Album"."ArtistId"
+	INNER JOIN "Track" ON "Album"."AlbumId" = "Track"."AlbumId"
+	INNER JOIN "InvoiceLine" ON "Track"."TrackId" = "InvoiceLine"."TrackId"
 ```
 
 13. Provide a query that shows the # of invoices per country. HINT: GROUP BY 
