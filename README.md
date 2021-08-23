@@ -127,14 +127,19 @@ FROM "Artist"
 
 13. Provide a query that shows the # of invoices per country. HINT: GROUP BY 
 ```sql
-
+SELECT 
+	"Invoice"."BillingCountry", COUNT(*) AS "Number_of_Invoices"
+FROM 
+	"Invoice"
+	GROUP BY "Invoice"."BillingCountry"
+ORDER BY COUNT(*) ASC
 ```
 
 14. Provide a query that shows the total number of tracks in each playlist. The Playlist name should be included on the resultant table. 
 ```sql
 SELECT 
 	"Playlist"."Name" AS "Name_Playlist", 
-	COUNT(*) AS "Number_of_positions"
+	COUNT(*) AS "Number_of_Tracks"
 FROM 
 	"PlaylistTrack"
 	JOIN "Playlist" USING("PlaylistId")
