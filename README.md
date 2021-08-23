@@ -132,7 +132,17 @@ FROM "Artist"
 
 14. Provide a query that shows the total number of tracks in each playlist. The Playlist name should be included on the resultant table. 
 ```sql
-
+SELECT 
+	"Playlist"."Name" AS "Name_Playlist", 
+	COUNT(*)
+FROM 
+	"PlaylistTrack"
+	JOIN "Playlist" USING("PlaylistId")
+	JOIN "Track" USING("TrackId")
+	JOIN "InvoiceLine" USING("TrackId")
+	JOIN "Invoice" USING("InvoiceId")
+GROUP BY "Playlist"."Name"
+ORDER BY COUNT(*) ASC
 ```
 
 15. Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
