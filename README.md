@@ -134,7 +134,7 @@ FROM "Artist"
 ```sql
 SELECT 
 	"Playlist"."Name" AS "Name_Playlist", 
-	COUNT(*)
+	COUNT(*) AS "Number_of_positions"
 FROM 
 	"PlaylistTrack"
 	JOIN "Playlist" USING("PlaylistId")
