@@ -4,7 +4,7 @@ Chinook is a sample database available for SQL Server, Oracle, MySQL, etc. It ca
 Specifying SQL Queries:
 -------
 1. Provide a query showing Customers (just their full names, customer ID and country) who are not in the US.
-```
+```sql
 SELECT
   "CustomerId",
   "FirstName",
