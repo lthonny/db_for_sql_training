@@ -63,7 +63,14 @@ FROM
 
 6. Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
 ```
-
+SELECT 
+	"Employee"."LastName", 
+	"Employee"."FirstName",
+	"Invoice".*
+FROM 
+	"Invoice"
+  	JOIN "Customer" USING("CustomerId")
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
 ```
 
 7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers. 
@@ -76,7 +83,7 @@ SELECT
   "Employee"."LastName"
 FROM
   "Customer"
-  INNER JOIN "Invoice" ON "Customer"."CustomerId" = "Invoice"."CustomerId"
+  INNER JOIN "Invoice" USING("CustomerId")
   INNER JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
 ```
 
