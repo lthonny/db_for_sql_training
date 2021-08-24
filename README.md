@@ -217,17 +217,44 @@ FROM
 
 24. Provide a query that shows the top 5 most purchased tracks over all. 
 ```sql
-
+SELECT 
+	"Track"."Name",
+	COUNT("InvoiceLine"."InvoiceLineId") AS "topTrack"
+FROM 
+	"Track"
+	JOIN "InvoiceLine" USING("TrackId")
+	GROUP BY ("Track"."Name")
+	ORDER BY ("topTrack") DESC
+LIMIT 5;
 ```
 
 25. Provide a query that shows the top 3 best selling artists.
 ```sql
-
+SELECT 
+	"Artist"."Name" AS "Artist",
+	COUNT("InvoiceLine"."InvoiceLineId") AS "topArtist"
+FROM 
+	"Album"
+	JOIN "Artist" USING("ArtistId")
+	JOIN "Track" USING("AlbumId")
+	JOIN "InvoiceLine" USING("TrackId")
+	GROUP BY ("Artist")
+	ORDER BY ("topArtist") DESC
+LIMIT 3;
 ```
 
 26. Provide a query that shows the most purchased Media Type. 
 ```sql
-
+SELECT 
+	"MediaType"."Name" AS "MediaType",
+	COUNT("InvoiceLine"."InvoiceLineId") AS "topMediaType"
+FROM 
+	"Track"
+	JOIN "MediaType" USING("MediaTypeId")
+	JOIN "InvoiceLine" USING("TrackId")
+	GROUP BY ("MediaType")
+	ORDER BY ("topMediaType") DESC
+LIMIT 1;
 ```
 
 27. Provide a query that shows the number tracks purchased in all invoices that contain more than one genre. 
