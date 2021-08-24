@@ -89,7 +89,14 @@ FROM
 
 8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?
 ```sql
-
+SELECT 
+	COUNT("Invoice"."InvoiceId"),
+	SUM("Invoice"."Total") AS "Total"
+FROM
+	"Invoice"
+WHERE
+	"Invoice"."InvoiceDate" BETWEEN '2009-01-01' AND '2009-12-31' OR 
+	"Invoice"."InvoiceDate" BETWEEN '2011-01-01' AND '2011-12-31'
 ```
 
 9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
@@ -182,22 +189,61 @@ FROM
 
 17. Provide a query that shows total sales made by each sales agent.
 ```sql
-
+SELECT 
+	DISTINCT "Employee"."LastName" || ' ' || "Employee"."FirstName" AS "SalesAgent",
+	SUM("Invoice"."Total") AS "Total"
+FROM
+	"Customer"
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
+	JOIN "Invoice" USING("CustomerId")
+	GROUP BY ("SalesAgent")
+	ORDER BY ("Total") DESC
 ```
 
 18. Which sales agent made the most in sales in 2009?
 ```sql
-
+SELECT 
+	DISTINCT "Employee"."LastName" || ' ' || "Employee"."FirstName" AS "SalesAgent",
+	SUM("Invoice"."Total") AS "Total"
+FROM
+	"Customer"
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
+	JOIN "Invoice" USING("CustomerId")
+WHERE 
+	"Invoice"."InvoiceDate" BETWEEN '2009-01-01' AND '2009-12-31'
+	GROUP BY ("SalesAgent")
+	ORDER BY ("Total") DESC
+LIMIT 1;
 ```
 
 19. Which sales agent made the most in sales in 2010?
 ```sql
-
+SELECT 
+	DISTINCT "Employee"."LastName" || ' ' || "Employee"."FirstName" AS "SalesAgent",
+	SUM("Invoice"."Total") AS "Total"
+FROM
+	"Customer"
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
+	JOIN "Invoice" USING("CustomerId")
+WHERE 
+	"Invoice"."InvoiceDate" BETWEEN '2010-01-01' AND '2010-12-31'
+	GROUP BY ("SalesAgent")
+	ORDER BY ("Total") DESC
+LIMIT 1;
 ```
 
 20. Which sales agent made the most in sales over all?
 ```sql
-
+SELECT 
+	DISTINCT "Employee"."LastName" || ' ' || "Employee"."FirstName" AS "SalesAgent",
+	SUM("Invoice"."Total") AS "Total"
+FROM
+	"Customer"
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
+	JOIN "Invoice" USING("CustomerId")
+	GROUP BY ("SalesAgent")
+	ORDER BY ("Total") DESC
+LIMIT 1;
 ```
 
 21. Provide a query that shows the # of customers assigned to each sales agent. 
