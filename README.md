@@ -152,7 +152,17 @@ ORDER BY COUNT(*) ASC
 
 15. Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
 ```sql
-
+SELECT 
+	"Track"."Name" AS "TrackName",
+	"Album"."Title" AS "AlbumTitle",
+	"Genre"."Name" AS "Genre",
+	"MediaTypeId" AS "MediaType"
+FROM 
+	"Track"
+	JOIN "Album" USING("AlbumId")
+	JOIN "Genre" USING("GenreId")
+	JOIN "MediaType" USING("MediaTypeId")
+	
 ```
 
 16. Provide a query that shows all Invoices but includes the # of invoice line items. 
