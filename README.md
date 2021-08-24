@@ -202,7 +202,16 @@ FROM
 
 21. Provide a query that shows the # of customers assigned to each sales agent. 
 ```sql
-
+SELECT 
+	"Employee"."LastName" || ' ' || "Employee"."FirstName" AS "SalesAgent",
+	COUNT("Customer"."SupportRepId") AS "TopSalesAgent"
+FROM
+	"Customer"
+	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
+	JOIN "Invoice" USING("CustomerId")
+	GROUP BY ("SalesAgent")
+	ORDER BY ("TopSalesAgent") DESC
+LIMIT 1;
 ```
 
 22. Provide a query that shows the total sales per country. Which country's customers spent the most?
