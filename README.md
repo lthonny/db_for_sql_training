@@ -94,12 +94,11 @@ FROM
 
 9. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 ```sql
-SELECT 	
-	COUNT("InvoiceId")
+SELECT 
+	COUNT("InvoiceLine"."InvoiceLineId") AS "NumberOfLineItems"
 FROM 
 	"InvoiceLine"
-WHERE 
-	"InvoiceId" = 37
+WHERE "InvoiceLine"."InvoiceLineId" = 37;
 ```
 
 10. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for each Invoice. HINT: GROUP BY
@@ -109,7 +108,12 @@ WHERE
 
 11. Provide a query that includes the track name with each invoice line item. 
 ```sql
-
+SELECT 
+	"Track"."Name" AS "trackName",
+	"InvoiceLine".*
+FROM
+	"Track"
+	JOIN "InvoiceLine" USING("TrackId")
 ```
 
 12. Provide a query that includes the purchased track name AND artist name with each invoice line item.
@@ -167,7 +171,13 @@ FROM
 
 16. Provide a query that shows all Invoices but includes the # of invoice line items. 
 ```sql
-
+SELECT 
+	"Invoice".*, 
+	COUNT("InvoiceLine"."InvoiceId") AS "ofLineItems"
+FROM 
+	"InvoiceLine"
+	JOIN "Invoice" USING("InvoiceId")
+	GROUP BY "Invoice"."InvoiceId"
 ```
 
 17. Provide a query that shows total sales made by each sales agent.
