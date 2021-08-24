@@ -207,7 +207,14 @@ FROM
 
 22. Provide a query that shows the total sales per country. Which country's customers spent the most?
 ```sql
-
+SELECT
+	DISTINCT "Invoice"."BillingCountry" AS "Country",
+	SUM("Invoice"."Total") AS "Total"
+FROM 
+	"Invoice"
+	GROUP BY ("Country")
+	ORDER BY ("Total") DESC
+LIMIT 1;
 ```
 
 23. Provide a query that shows the most purchased track of 2013.
