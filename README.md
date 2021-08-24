@@ -74,14 +74,14 @@ FROM
 7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers. 
 ```sql
 SELECT
-  "Customer"."FirstName" || ' ' || "Customer"."LastName" AS "Customer",
-  "Invoice"."BillingCountry",
-  "Invoice"."Total",
-  "Employee"."LastName"
+  	"Customer"."FirstName" || ' ' || "Customer"."LastName" AS "Customer",
+  	"Invoice"."BillingCountry",
+  	"Invoice"."Total",
+  	"Employee"."LastName"
 FROM
-  "Customer"
-  JOIN "Invoice" USING("CustomerId")
-  JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
+  	"Customer"
+  	JOIN "Invoice" USING("CustomerId")
+ 	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
 ```
 
 8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?
@@ -132,7 +132,8 @@ SELECT
 	"Track"."Composer",
 	"Track"."Name" AS "NameTrack",
 	"InvoiceLine"."InvoiceId"
-FROM "Artist"
+FROM 
+	"Artist"
 	JOIN "Album" USING("ArtistId")
 	JOIN "Track" USING("AlbumId")
 	JOIN "InvoiceLine" USING("TrackId");
