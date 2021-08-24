@@ -33,16 +33,15 @@ WHERE
 ```sql
 SELECT
   "Customer"."CustomerId",
-  "FirstName",
-  "LastName",
-  "InvoiceId",
-  "InvoiceDate",
-  "BillingCountry"
+  "Customer"."FirstName" || ' ' || "Customer"."LastName" AS "Customer",
+  "Invoice"."InvoiceId",
+  "Invoice"."InvoiceDate",
+  "Invoice"."BillingCountry"
 FROM
   "Customer"
-  INNER JOIN "Invoice" ON "Customer"."CustomerId" = "Invoice"."CustomerId"
+  JOIN "Invoice" USING("CustomerId")
 WHERE
-  "BillingCountry" = 'USA';
+  "Invoice"."BillingCountry" = 'USA';
 ```
 
 4. Provide a query showing only the Employees who are Sales Agents.
@@ -55,8 +54,8 @@ FROM
 
 5. Provide a query showing a unique list of billing countries from the Invoice table. 
 ```sql
-SELECT DISTINCT
-  "BillingCountry"
+SELECT 
+	DISTINCT "Invoice"."BillingCountry"
 FROM
   "Invoice";
 ```
@@ -64,8 +63,7 @@ FROM
 6. Provide a query that shows the invoices associated with each sales agent. The resultant table should include the Sales Agent's full name.
 ```sql
 SELECT 
-	"Employee"."LastName", 
-	"Employee"."FirstName",
+	"Employee"."LastName" || ' ' || "Employee"."FirstName" AS "Employee",
 	"Invoice".*
 FROM 
 	"Invoice"
@@ -76,15 +74,14 @@ FROM
 7. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices and customers. 
 ```sql
 SELECT
-  "Customer"."FirstName",
-  "Customer"."LastName",
+  "Customer"."FirstName" || ' ' || "Customer"."LastName" AS "Customer",
   "Invoice"."BillingCountry",
   "Invoice"."Total",
   "Employee"."LastName"
 FROM
   "Customer"
-  INNER JOIN "Invoice" USING("CustomerId")
-  INNER JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
+  JOIN "Invoice" USING("CustomerId")
+  JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId";
 ```
 
 8. How many Invoices were there in 2009 and 2011? What are the respective total sales for each of those years?
@@ -115,7 +112,7 @@ SELECT
 	COUNT("InvoiceLine"."InvoiceId")
 FROM
 	"InvoiceLine"
-	GROUP BY("InvoiceId")
+	GROUP BY("InvoiceId");
 ```
 
 11. Provide a query that includes the track name with each invoice line item. 
@@ -125,7 +122,7 @@ SELECT
 	"InvoiceLine".*
 FROM
 	"Track"
-	JOIN "InvoiceLine" USING("TrackId")
+	JOIN "InvoiceLine" USING("TrackId");
 ```
 
 12. Provide a query that includes the purchased track name AND artist name with each invoice line item.
@@ -136,19 +133,20 @@ SELECT
 	"Track"."Name" AS "NameTrack",
 	"InvoiceLine"."InvoiceId"
 FROM "Artist"
-	INNER JOIN "Album" ON "Artist"."ArtistId" = "Album"."ArtistId"
-	INNER JOIN "Track" ON "Album"."AlbumId" = "Track"."AlbumId"
-	INNER JOIN "InvoiceLine" ON "Track"."TrackId" = "InvoiceLine"."TrackId"
+	JOIN "Album" USING("ArtistId")
+	JOIN "Track" USING("AlbumId")
+	JOIN "InvoiceLine" USING("TrackId");
 ```
 
 13. Provide a query that shows the # of invoices per country. HINT: GROUP BY 
 ```sql
 SELECT 
-	"Invoice"."BillingCountry", COUNT(*) AS "Number_of_Invoices"
+	"Invoice"."BillingCountry", 
+	COUNT(*) AS "Number_of_Invoices"
 FROM 
 	"Invoice"
-	GROUP BY "Invoice"."BillingCountry"
-ORDER BY COUNT(*) ASC
+GROUP BY ("Invoice"."BillingCountry")
+ORDER BY ("Number_of_Invoices") ASC;
 ```
 
 14. Provide a query that shows the total number of tracks in each playlist. The Playlist name should be included on the resultant table. 
@@ -162,8 +160,8 @@ FROM
 	JOIN "Track" USING("TrackId")
 	JOIN "InvoiceLine" USING("TrackId")
 	JOIN "Invoice" USING("InvoiceId")
-GROUP BY "Playlist"."Name"
-ORDER BY COUNT(*) ASC
+GROUP BY ("Playlist"."Name")
+ORDER BY ("Number_of_Tracks") ASC;
 ```
 
 15. Provide a query that shows all the Tracks, but displays no IDs. The resultant table should include the Album name, Media type and Genre.
@@ -177,8 +175,7 @@ FROM
 	"Track"
 	JOIN "Album" USING("AlbumId")
 	JOIN "Genre" USING("GenreId")
-	JOIN "MediaType" USING("MediaTypeId")
-	
+	JOIN "MediaType" USING("MediaTypeId");
 ```
 
 16. Provide a query that shows all Invoices but includes the # of invoice line items. 
@@ -189,7 +186,7 @@ SELECT
 FROM 
 	"InvoiceLine"
 	JOIN "Invoice" USING("InvoiceId")
-	GROUP BY "Invoice"."InvoiceId"
+GROUP BY ("Invoice"."InvoiceId");
 ```
 
 17. Provide a query that shows total sales made by each sales agent.
@@ -201,8 +198,8 @@ FROM
 	"Customer"
 	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
 	JOIN "Invoice" USING("CustomerId")
-	GROUP BY ("SalesAgent")
-	ORDER BY ("Total") DESC
+GROUP BY ("SalesAgent")
+ORDER BY ("Total") DESC;
 ```
 
 18. Which sales agent made the most in sales in 2009?
@@ -216,8 +213,8 @@ FROM
 	JOIN "Invoice" USING("CustomerId")
 WHERE 
 	"Invoice"."InvoiceDate" BETWEEN '2009-01-01' AND '2009-12-31'
-	GROUP BY ("SalesAgent")
-	ORDER BY ("Total") DESC
+GROUP BY ("SalesAgent")
+ORDER BY ("Total") DESC
 LIMIT 1;
 ```
 
@@ -232,8 +229,8 @@ FROM
 	JOIN "Invoice" USING("CustomerId")
 WHERE 
 	"Invoice"."InvoiceDate" BETWEEN '2010-01-01' AND '2010-12-31'
-	GROUP BY ("SalesAgent")
-	ORDER BY ("Total") DESC
+GROUP BY ("SalesAgent")
+ORDER BY ("Total") DESC
 LIMIT 1;
 ```
 
@@ -246,8 +243,8 @@ FROM
 	"Customer"
 	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
 	JOIN "Invoice" USING("CustomerId")
-	GROUP BY ("SalesAgent")
-	ORDER BY ("Total") DESC
+GROUP BY ("SalesAgent")
+ORDER BY ("Total") DESC
 LIMIT 1;
 ```
 
@@ -260,8 +257,8 @@ FROM
 	"Customer"
 	JOIN "Employee" ON "Customer"."SupportRepId" = "Employee"."EmployeeId"
 	JOIN "Invoice" USING("CustomerId")
-	GROUP BY ("SalesAgent")
-	ORDER BY ("TopSalesAgent") DESC
+GROUP BY ("SalesAgent")
+ORDER BY ("TopSalesAgent") DESC
 LIMIT 1;
 ```
 
@@ -272,8 +269,8 @@ SELECT
 	SUM("Invoice"."Total") AS "Total"
 FROM 
 	"Invoice"
-	GROUP BY ("Country")
-	ORDER BY ("Total") DESC
+GROUP BY ("Country")
+ORDER BY ("Total") DESC
 LIMIT 1;
 ```
 
@@ -288,8 +285,8 @@ FROM
 	JOIN "Invoice" USING("InvoiceId")
 WHERE 
 	"Invoice"."InvoiceDate" BETWEEN  '2013-01-01' AND '2013-12-31'
-	GROUP BY ("ComposerName")
-	ORDER BY ("topComposer") DESC
+GROUP BY ("ComposerName")
+ORDER BY ("topComposer") DESC
 LIMIT 1;
 ```
 
@@ -301,8 +298,8 @@ SELECT
 FROM 
 	"Track"
 	JOIN "InvoiceLine" USING("TrackId")
-	GROUP BY ("Track"."Name")
-	ORDER BY ("topTrack") DESC
+GROUP BY ("Track"."Name")
+ORDER BY ("topTrack") DESC
 LIMIT 5;
 ```
 
@@ -316,8 +313,8 @@ FROM
 	JOIN "Artist" USING("ArtistId")
 	JOIN "Track" USING("AlbumId")
 	JOIN "InvoiceLine" USING("TrackId")
-	GROUP BY ("Artist")
-	ORDER BY ("topArtist") DESC
+GROUP BY ("Artist")
+ORDER BY ("topArtist") DESC
 LIMIT 3;
 ```
 
@@ -330,8 +327,8 @@ FROM
 	"Track"
 	JOIN "MediaType" USING("MediaTypeId")
 	JOIN "InvoiceLine" USING("TrackId")
-	GROUP BY ("MediaType")
-	ORDER BY ("topMediaType") DESC
+GROUP BY ("MediaType")
+ORDER BY ("topMediaType") DESC
 LIMIT 1;
 ```
 
@@ -348,8 +345,8 @@ FROM
 	JOIN "Invoice" USING("InvoiceId")
 WHERE
 	"Track"."GenreId" > 1
-	GROUP BY("MediaType"."Name")
-	ORDER BY("PurchasedСompositions") DESC
+GROUP BY ("MediaType"."Name")
+ORDER BY ("PurchasedСompositions") DESC;
 ```
 
 
