@@ -337,7 +337,19 @@ LIMIT 1;
 
 27. Provide a query that shows the number tracks purchased in all invoices that contain more than one genre. 
 ```sql
-
+SELECT
+	DISTINCT "MediaType"."Name",
+	COUNT("Track"."TrackId") AS "PurchasedСompositions"
+FROM 
+	"Track"
+	JOIN "MediaType" USING("MediaTypeId")
+	JOIN "Genre" USING("GenreId")
+	JOIN "InvoiceLine" USING("TrackId")
+	JOIN "Invoice" USING("InvoiceId")
+WHERE
+	"Track"."GenreId" > 1
+	GROUP BY("MediaType"."Name")
+	ORDER BY("PurchasedСompositions") DESC
 ```
 
 
