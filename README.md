@@ -212,7 +212,18 @@ FROM
 
 23. Provide a query that shows the most purchased track of 2013.
 ```sql
-
+SELECT
+	"Track"."Composer" AS "ComposerName",
+	COUNT("InvoiceLine"."InvoiceLineId") AS "topComposer"
+FROM 
+	"Track"
+	JOIN "InvoiceLine" USING("TrackId")
+	JOIN "Invoice" USING("InvoiceId")
+WHERE 
+	"Invoice"."InvoiceDate" BETWEEN  '2013-01-01' AND '2013-12-31'
+	GROUP BY ("ComposerName")
+	ORDER BY ("topComposer") DESC
+LIMIT 1;
 ```
 
 24. Provide a query that shows the top 5 most purchased tracks over all. 
